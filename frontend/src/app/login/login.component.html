@@ -15,9 +15,10 @@
 
         <label>Clave</label>
         <input #clave type="password" class="form-control">
-
         <br>
-        <button (click)="iniciarSesion(usuario.value,clave.value)" type="submit" class="btn btn-primary">Iniciar sesion</button>
+        <div id=alerta class="alert alert-danger" style="display: none;" role="alert">Usuario o clave incorrecto</div>
+        <br>
+        <button (click)="iniciarSesion(usuario.value,clave.value)" class="btn btn-primary">Iniciar sesion</button>
       </form>
     </div>
     <div class="col-4"></div>

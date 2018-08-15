@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BrowserModule }  from '@angular/platform-browser';
 import { Router } from '@angular/router';
-
-import {BackendService} from "../backend.service";
+import {HttpClient} from "@angular/common/http";
 import {Empleado} from "../empleado";
 
 @Component({
@@ -13,20 +12,30 @@ import {Empleado} from "../empleado";
 })
 export class LoginComponent implements OnInit {
 
-  empleados: Empleado[];
+  empleados: Empleado;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
-              private servicios: BackendService) {
+              private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.servicios.getEmpleados().subscribe(empleados => this.empleados = empleados);
+    this.httpClient.get("http://localhost:1337/empleado")
+      .subscribe((data: any[]) =>
+      {
+        this.empleados = data[0];
+      }
+    )
   }
-
-
   iniciarSesion (usuario : string, clave: string){
-    console.log(this.empleados)
+    if (this.empleados.usuario == usuario && this.empleados.clave == clave)
+    {
+      console.log("Si vale")
+    }
+    else {
+      var x = document.getElementById("alerta")
+      x.style.display = "block";
+    }
   }
 
 }
