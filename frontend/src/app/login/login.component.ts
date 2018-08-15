@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
   iniciarSesion (usuario : string, clave: string){
     if (this.empleados.usuario == usuario && this.empleados.clave == clave)
     {
+      const url = ["/factura"];
+      this.router.navigate(url);
       console.log("Si vale")
     }
     else {
